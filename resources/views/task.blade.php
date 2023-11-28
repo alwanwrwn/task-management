@@ -131,30 +131,6 @@
         });
     }
 
-    function deleteTask(taskId){
-        $.ajax({
-          type: 'POST',
-          url: 'http://127.0.0.1:8000/api/delete',
-          data: {id : taskId},
-          success: function(response){
-            location.reload();
-            console.log('Success:', response);
-          },
-          error: function(error){
-            console.log('Error:', error);
-          }
-        });
-    }
-
-    function editTask(taskId){
-        $.get('http://127.0.0.1:8000/api/read', {id : taskId}).done(function (data){
-            $('#id_edit').val(data.id);
-            $('#title_edit').val(data.title);
-            $('#description_edit').val(data.description);
-            $('#status_edit').val(data.status);
-        })
-    }
-
     let status = ['to do', 'in progress', 'done'];
 
     status.forEach(element => {
@@ -211,6 +187,31 @@
           }
         });
     });
+
+    function editTask(taskId){
+        $.get('http://127.0.0.1:8000/api/read', {id : taskId}).done(function (data){
+            $('#id_edit').val(data.id);
+            $('#title_edit').val(data.title);
+            $('#description_edit').val(data.description);
+            $('#status_edit').val(data.status);
+        })
+    }
+
+    // Delete Task
+    function deleteTask(taskId){
+        $.ajax({
+          type: 'POST',
+          url: 'http://127.0.0.1:8000/api/delete',
+          data: {id : taskId},
+          success: function(response){
+            location.reload();
+            console.log('Success:', response);
+          },
+          error: function(error){
+            console.log('Error:', error);
+          }
+        });
+    }
     
   </script>
 </html>
